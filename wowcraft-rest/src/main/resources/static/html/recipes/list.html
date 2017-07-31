@@ -1,0 +1,27 @@
+
+<div ng-controller="RecipeListCtrl as ctrl" class="container">
+    <div class="row">
+        <h3>Список рецептов для профессии <strong>{{ctrl.profession.name}}</strong></h3>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <button class="btn btn-primary" ng-click="ctrl.addDialog()">Add</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>Название</th>
+                    <th>Себестоимость</th>
+                </tr>
+                </thead>
+                <tr ng-repeat="recipe in ctrl.recipes">
+                    <td>{{recipe.name}}</td>
+                    <td>{{recipe.price}}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>

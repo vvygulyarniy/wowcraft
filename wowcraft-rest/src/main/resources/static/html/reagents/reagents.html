@@ -1,0 +1,74 @@
+<div class="container text-center" ng-controller="ReagentsCtrl as ctrl">
+    <div class="row">
+        <h4 class="text-center">Reagents</h4>
+    </div>
+    <div class="row">
+        <form class="form-group form-inline">
+            <div class="col-lg-9">
+                <ng-if ng-if="ctrl.addInProgress == true">
+                    <input class="form-control" type="text" id="reagent_name" placeholder="Reagent name"
+                           ng-model="ctrl.addForm.name"/>
+                    <select name="reagentProfession" ng-model="ctrl.addForm.profession" class="form-control">
+                        <option ng-repeat="profession in ctrl.professions" value="{{profession.id}}">{{profession.name}}
+                        </option>
+                    </select>
+                    <input class="form-control" type="text" id="reagent_price" placeholder="Price"
+                           ng-model="ctrl.addForm.price"/>
+                    <button class="form-control" type="submit" ng-click="ctrl.addNewReagent()">Add</button>
+                </ng-if>
+            </div>
+        </form>
+    </div>
+    <div class="row" ng-if="ctrl.addInProgress == false">
+        <form class="form-group form-inline">
+            <div class="col-lg-9">
+                <button class="btn btn-default" ng-click="ctrl.startAdding()">Add new</button>
+                <input type="text" class="form-control" id="name" placeholder="Reagent name"
+                       ng-model="ctrl.filter.name"/>
+            </div>
+        </form>
+    </div>
+    <div class="row">
+        <div class="col-lg-9">
+            <table class="table table-striped text-center">
+                <thead>
+                <tr>
+                    <th>№</th>
+                    <th>Название</th>
+                    <th>Профессия</th>
+                    <th>Цена</th>
+                    <th>Действия</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                <tr ng-repeat="reagent in ctrl.reagents | filter: ctrl.filter">
+                    <form class="form-group form-inline">
+                        <td>{{reagent.id}}</td>
+                        <td>{{reagent.name}}</td>
+                        <td>{{reagent.profession.name}}</td>
+                        <td>
+                            <ng-if ng-if="!ctrl.editInProgress || ctrl.editForm.id != reagent.id">{{reagent.price}}
+                            </ng-if>
+                            <ng-if ng-if="ctrl.editInProgress && ctrl.editForm.id == reagent.id">
+                                <input type="text" class="form-control" ng-model="ctrl.editForm.price"
+                                       maxlength="10" style="width: 6em"/>
+                            </ng-if>
+                        </td>
+                        <td>
+                            <ng-if ng-if="!ctrl.editInProgress">
+                                <span class="glyphicon glyphicon-pencil"
+                                      ng-click="ctrl.startEditing(reagent.id)"></span>
+                            </ng-if>
+                            <ng-if ng-if="ctrl.editInProgress && ctrl.editForm.id == reagent.id">
+                                <span class="glyphicon glyphicon-save-file"
+                                      ng-click="ctrl.updateReagent(ctrl.editForm)"></span>
+                            </ng-if>
+                        </td>
+                    </form>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
