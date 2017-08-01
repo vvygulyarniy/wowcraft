@@ -13,7 +13,7 @@ import java.util.Collection;
 import java.util.List;
 
 public class AuctionHouseClient {
-    public static final String ENDPOINT = "https://eu.api.battle.net/wow/auction/data/{server}?locale={locale}&apikey={bnetKey}";
+    private static final String ENDPOINT = "https://eu.api.battle.net/wow/auction/data/{server}?locale={locale}&apikey={bnetKey}";
     private final RestTemplate restTemplate;
     private final String bnetKey;
 

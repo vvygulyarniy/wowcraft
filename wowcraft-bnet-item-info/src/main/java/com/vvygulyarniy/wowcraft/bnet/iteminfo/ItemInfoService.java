@@ -26,12 +26,12 @@ public class ItemInfoService {
 
     @GetMapping(path = "/{id}")
     public ResponseEntity<?> itemInfo(@PathVariable("id") Long itemId,
-                                            @RequestParam(value = "locale", defaultValue = "ru_RU") String locale) throws IOException {
+                                      @RequestParam(value = "locale", defaultValue = "ru_RU") String locale) throws IOException {
         try {
             return new ResponseEntity<>(restTemplate.getForObject(REST_ENDPOINT, ItemInfo.class, itemId, locale, key),
                                         HttpStatus.OK);
         } catch (HttpClientErrorException e) {
-            return new ResponseEntity<>("Item info not found: " + e.getMessage(), NOT_FOUND);
+            return new ResponseEntity<>("Item with ID=" + itemId + "info not found: " + e.getMessage(), NOT_FOUND);
         }
     }
 

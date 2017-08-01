@@ -1,3 +1,3 @@
 FROM java:8
-COPY "./target/wowcraft-bnet-item-info-0.0.1-SNAPSHOT.jar" "/usr/bin"
-CMD ["/usr/bin/wowcraft-bnet-item-info-0.0.1-SNAPSHOT.jar"]
+ADD "./target/bnet-item-info.jar" "/usr/bin"
+CMD ["java", "-jar", "/usr/bin/bnet-item-info.jar"]
